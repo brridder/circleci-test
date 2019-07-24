@@ -21,9 +21,13 @@ jobs:
       - attach_workspace:
           at: /root/project
       - run:
-          command: ls -al /root/project/out #|
-          #/tmp/workspace/out/add 1.txt 2.txt /tmp/workspace/3.txt
-          #cat /tmp/workspace/3.txt
+          command: |
+            out/add 1.txt 2.txt 3.txt
+            cat 3.txt
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - 3.txt
 
 workflows:
   version: 2
