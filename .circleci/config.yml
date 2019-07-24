@@ -7,7 +7,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: ./b --cfg Debug -v
+          command: ./b
       - persist_to_workspace:
           root: workspace
           paths:
