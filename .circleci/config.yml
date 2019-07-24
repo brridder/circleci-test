@@ -26,6 +26,7 @@ jobs:
           #cat /tmp/workspace/3.txt
 
 workflows:
+  version: 2
   submit-gate:
     jobs:
       - build-gcc
