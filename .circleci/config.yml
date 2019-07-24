@@ -13,6 +13,7 @@ jobs:
           paths:
             - out
 
+
   add_1_2:
     docker:
       - image: charlesnicholson/circleci-images:latest
@@ -24,18 +25,6 @@ jobs:
         command: |
           /tmp/workspace/out/add 1.txt 2.txt /tmp/workspace/3.txt
           cat /tmp/workspace/3.txt
-
-
-  build-clang-release:
-    docker:
-      - image: charlesnicholson/circleci-images:latest
-    environment:
-      CC: /usr/bin/clang
-      CXX: /usr/bin/clang++
-    steps:
-      - checkout
-      - run:
-          command: ./b --cfg Release -v
 
 workflows:
   submit-gate:
