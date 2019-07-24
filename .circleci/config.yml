@@ -9,9 +9,9 @@ jobs:
       - run:
           command: ./b
       - persist_to_workspace:
-          root: workspace
+          root: /root/project
           paths:
-            - out
+            - out/*
 
   add_1_2:
     docker:
@@ -19,9 +19,9 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/workspace
+          at: /root/project
       - run:
-        command: ls -al /tmp/workspace/out #|
+        command: ls -al /out #|
           #/tmp/workspace/out/add 1.txt 2.txt /tmp/workspace/3.txt
           #cat /tmp/workspace/3.txt
 
