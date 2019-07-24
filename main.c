@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// loads an integer from a text file, poorly.
 int load_int_from_file(char const *file) {
   FILE *fp = fopen(file, "rt");
   fseek(fp, 0, SEEK_END);
