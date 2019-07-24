@@ -29,11 +29,68 @@ jobs:
           paths:
             - 3.txt
 
+  add_2_2:
+    docker:
+      - image: charlesnicholson/circleci-images:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /root/project
+      - run:
+          command: |
+            out/add 2.txt 2.txt 4.txt
+            cat 4.txt
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - 4.txt
+
+  add_2_3:
+    docker:
+      - image: charlesnicholson/circleci-images:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /root/project
+      - run:
+          command: |
+            out/add 2.txt 3.txt 5.txt
+            cat 5.txt
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - 5.txt
+
+  add_5_4:
+    docker:
+      - image: charlesnicholson/circleci-images:latest
+    steps:
+      - checkout
+      - attach_workspace:
+          at: /root/project
+      - run:
+          command: |
+            out/add 5.txt 4.txt 9.txt
+            cat 9.txt
+      - persist_to_workspace:
+          root: /root/project
+          paths:
+            - 9.txt
+
 workflows:
-  version: 2
   submit-gate:
     jobs:
       - build-gcc
       - add_1_2:
           requires:
             - build-gcc
+      - add_2_2:
+          requires:
+            - build-gcc
+      - add_2_3:
+          requires:
+            - add_1_2
+      - add_5_4:
+          requires:
+            - add_2_3
+            - add_2_2
