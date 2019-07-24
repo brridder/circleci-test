@@ -1,1 +1,1 @@
-gcc -Wall -Wextra -Werror -Os main.c
+gcc -Wall -Wextra -Werror -Os main.c -o add
