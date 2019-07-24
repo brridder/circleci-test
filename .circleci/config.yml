@@ -1,7 +1,7 @@
 version: 2.1
 
 jobs:
-  build:
+  build-gcc:
     docker:
       - image: charlesnicholson/circleci-images:latest
     steps:
@@ -12,7 +12,6 @@ jobs:
           root: workspace
           paths:
             - out
-
 
   add_1_2:
     docker:
@@ -29,7 +28,7 @@ jobs:
 workflows:
   submit-gate:
     jobs:
-      - build
+      - build-gcc
       - add_1_2:
         requires:
-          - build
+          - build-gcc
