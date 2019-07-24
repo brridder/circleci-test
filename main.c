@@ -1,3 +1,4 @@
+// add numbers from files.
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,7 +9,8 @@ int load_int_from_file(char const *file) {
   long const n = ftell(fp);
   rewind(fp);
   char *buf = malloc(n + 1);
-  fread(buf, n, 1, fp);
+  int const unused = fread(buf, n, 1, fp);
+  (void)unused;
   int const i = strtol(buf, NULL, 10);
   free(buf);
   return i;

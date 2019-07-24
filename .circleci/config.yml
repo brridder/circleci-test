@@ -1,18 +1,17 @@
 version: 2.1
 
 jobs:
-  build:
+  build-gcc:
     docker:
       - image: charlesnicholson/circleci-images:latest
     steps:
       - checkout
       - run:
-          command: ./b --cfg Debug -v
+          command: ./b
       - persist_to_workspace:
-          root: workspace
+          root: /root/project
           paths:
-            - out
-
+            - out/*
 
   add_1_2:
     docker:
@@ -20,16 +19,17 @@ jobs:
     steps:
       - checkout
       - attach_workspace:
-          at: /tmp/workspace
+          at: /root/project
       - run:
-        command: |
-          /tmp/workspace/out/add 1.txt 2.txt /tmp/workspace/3.txt
-          cat /tmp/workspace/3.txt
+        command: ls -al /out #|
+          #/tmp/workspace/out/add 1.txt 2.txt /tmp/workspace/3.txt
+          #cat /tmp/workspace/3.txt
 
 workflows:
+  version: 2
   submit-gate:
     jobs:
-      - build
-      - add_1_2:
-        requires:
-          - build
+      - build-gcc
+        #      - add_1_2:
+        #        requires:
+        #          - build-gcc
