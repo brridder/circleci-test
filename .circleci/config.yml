@@ -21,7 +21,7 @@ jobs:
       - attach_workspace:
           at: /root/project
       - run:
-        command: ls -al /out #|
+          command: ls -al /out #|
           #/tmp/workspace/out/add 1.txt 2.txt /tmp/workspace/3.txt
           #cat /tmp/workspace/3.txt
 
